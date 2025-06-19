@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="otobusbiletDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="otobusbiletDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="biletler" EntityType="otobusbiletDBModel.biletler" />
+    <EntitySet Name="koltuklar" EntityType="otobusbiletDBModel.koltuklar" />
+    <EntitySet Name="kullanici_hareketleri" EntityType="otobusbiletDBModel.kullanici_hareketleri" />
+    <EntitySet Name="kullanicilar" EntityType="otobusbiletDBModel.kullanicilar" />
+    <EntitySet Name="otobusler" EntityType="otobusbiletDBModel.otobusler" />
+    <EntitySet Name="seferler" EntityType="otobusbiletDBModel.seferler" />
+    <EntitySet Name="sifre_sifirlama" EntityType="otobusbiletDBModel.sifre_sifirlama" />
+    <EntitySet Name="sysdiagrams" EntityType="otobusbiletDBModel.sysdiagrams" />
+  </EntityContainer>
+  <EntityType Name="biletler">
+    <Key>
+      <PropertyRef Name="bilet_id" />
+    </Key>
+    <Property Name="bilet_id" Type="Int32" Nullable="false" />
+    <Property Name="kullanici_id" Type="Int32" />
+    <Property Name="koltuk_id" Type="Int32" />
+    <Property Name="satin_almaTarihi" Type="DateTime" Precision="3" />
+    <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="koltuklar">
+    <Key>
+      <PropertyRef Name="koltuk_id" />
+    </Key>
+    <Property Name="koltuk_id" Type="Int32" Nullable="false" />
+    <Property Name="seyahat_id" Type="Int32" />
+    <Property Name="koltuk_numarasi" Type="Int32" />
+    <Property Name="isEmpty" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="kullanici_hareketleri">
+    <Key>
+      <PropertyRef Name="eylem_id" />
+    </Key>
+    <Property Name="eylem_id" Type="Int32" Nullable="false" />
+    <Property Name="kullanici_id" Type="Int32" />
+    <Property Name="eylem_aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="eylem_zamani" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="kullanicilar">
+    <Key>
+      <PropertyRef Name="kullanici_id" />
+    </Key>
+    <Property Name="kullanici_id" Type="Int32" Nullable="false" />
+    <Property Name="sifre_guvenlik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ad_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="tel" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="tc" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="cinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="otobusler">
+    <Key>
+      <PropertyRef Name="otobus_id" />
+    </Key>
+    <Property Name="otobus_id" Type="Int32" Nullable="false" />
+    <Property Name="plaka" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="koltuk_sayisi" Type="Int32" />
+    <Property Name="firma_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="otobus_resim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="peron_no" Type="Int32" />
+  </EntityType>
+  <EntityType Name="seferler">
+    <Key>
+      <PropertyRef Name="seyahat_id" />
+    </Key>
+    <Property Name="seyahat_id" Type="Int32" Nullable="false" />
+    <Property Name="kalkis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="varis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kalkis_zamani" Type="DateTime" Precision="3" />
+    <Property Name="bilet_fiyat" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="otobus_id" Type="Int32" />
+    <Property Name="otobus_type" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sifre_sifirlama">
+    <Key>
+      <PropertyRef Name="sifre_id" />
+    </Key>
+    <Property Name="sifre_id" Type="Int32" Nullable="false" />
+    <Property Name="kullanici_id" Type="Int32" />
+    <Property Name="sifirla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="son_kullanmaTarihi" Type="DateTime" Precision="3" />
+    <Property Name="kullanilan" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

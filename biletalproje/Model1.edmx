@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="otobusbiletDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="biletler">
+          <Key>
+            <PropertyRef Name="bilet_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int" />
+          <Property Name="koltuk_id" Type="int" />
+          <Property Name="satin_almaTarihi" Type="datetime" />
+          <Property Name="fiyat" Type="money" />
+          <Property Name="bilet_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="koltuklar">
+          <Key>
+            <PropertyRef Name="koltuk_id" />
+          </Key>
+          <Property Name="koltuk_id" Type="int" Nullable="false" />
+          <Property Name="seyahat_id" Type="int" />
+          <Property Name="koltuk_numarasi" Type="int" />
+          <Property Name="isEmpty" Type="bit" />
+        </EntityType>
+        <EntityType Name="kullanici_hareketleri">
+          <Key>
+            <PropertyRef Name="eylem_id" />
+          </Key>
+          <Property Name="eylem_id" Type="int" Nullable="false" />
+          <Property Name="kullanici_id" Type="int" />
+          <Property Name="eylem_aciklama" Type="nvarchar(max)" />
+          <Property Name="eylem_zamani" Type="datetime" />
+        </EntityType>
+        <EntityType Name="kullanicilar">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int" Nullable="false" />
+          <Property Name="sifre_guvenlik" Type="nvarchar" MaxLength="50" />
+          <Property Name="ad_soyad" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar(max)" />
+          <Property Name="tel" Type="nvarchar" MaxLength="11" />
+          <Property Name="tc" Type="nvarchar" MaxLength="11" />
+          <Property Name="cinsiyet" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="otobusler">
+          <Key>
+            <PropertyRef Name="otobus_id" />
+          </Key>
+          <Property Name="otobus_id" Type="int" Nullable="false" />
+          <Property Name="plaka" Type="nvarchar" MaxLength="20" />
+          <Property Name="koltuk_sayisi" Type="int" />
+          <Property Name="firma_adi" Type="nvarchar" MaxLength="50" />
+          <Property Name="otobus_resim" Type="nvarchar(max)" />
+          <Property Name="peron_no" Type="int" />
+        </EntityType>
+        <EntityType Name="seferler">
+          <Key>
+            <PropertyRef Name="seyahat_id" />
+          </Key>
+          <Property Name="seyahat_id" Type="int" Nullable="false" />
+          <Property Name="kalkis" Type="nvarchar" MaxLength="50" />
+          <Property Name="varis" Type="nvarchar" MaxLength="50" />
+          <Property Name="kalkis_zamani" Type="datetime" />
+          <Property Name="bilet_fiyat" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="otobus_id" Type="int" />
+          <Property Name="otobus_type" Type="int" />
+        </EntityType>
+        <EntityType Name="sifre_sifirlama">
+          <Key>
+            <PropertyRef Name="sifre_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int" />
+          <Property Name="sifirla" Type="nvarchar" MaxLength="50" />
+          <Property Name="son_kullanmaTarihi" Type="datetime" />
+          <Property Name="kullanilan" Type="bit" />
+          <Property Name="sifre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'otobusbiletDB.dbo.yonetici' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="yonetici">
+          <Property Name="yönetici_id" Type="int" />
+          <Property Name="isim" Type="nvarchar" MaxLength="50" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="5" />
+        </EntityType>-->
+        <EntityContainer Name="otobusbiletDBModelStoreContainer">
+          <EntitySet Name="biletler" EntityType="Self.biletler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="koltuklar" EntityType="Self.koltuklar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kullanici_hareketleri" EntityType="Self.kullanici_hareketleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kullanicilar" EntityType="Self.kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="otobusler" EntityType="Self.otobusler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seferler" EntityType="Self.seferler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sifre_sifirlama" EntityType="Self.sifre_sifirlama" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="otobusbiletDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="otobusbiletDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="biletler" EntityType="otobusbiletDBModel.biletler" />
+          <EntitySet Name="koltuklar" EntityType="otobusbiletDBModel.koltuklar" />
+          <EntitySet Name="kullanici_hareketleri" EntityType="otobusbiletDBModel.kullanici_hareketleri" />
+          <EntitySet Name="kullanicilar" EntityType="otobusbiletDBModel.kullanicilar" />
+          <EntitySet Name="otobusler" EntityType="otobusbiletDBModel.otobusler" />
+          <EntitySet Name="seferler" EntityType="otobusbiletDBModel.seferler" />
+          <EntitySet Name="sifre_sifirlama" EntityType="otobusbiletDBModel.sifre_sifirlama" />
+          <EntitySet Name="sysdiagrams" EntityType="otobusbiletDBModel.sysdiagrams" />
+        </EntityContainer>
+        <EntityType Name="biletler">
+          <Key>
+            <PropertyRef Name="bilet_id" />
+          </Key>
+          <Property Name="bilet_id" Type="Int32" Nullable="false" />
+          <Property Name="kullanici_id" Type="Int32" />
+          <Property Name="koltuk_id" Type="Int32" />
+          <Property Name="satin_almaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="koltuklar">
+          <Key>
+            <PropertyRef Name="koltuk_id" />
+          </Key>
+          <Property Name="koltuk_id" Type="Int32" Nullable="false" />
+          <Property Name="seyahat_id" Type="Int32" />
+          <Property Name="koltuk_numarasi" Type="Int32" />
+          <Property Name="isEmpty" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="kullanici_hareketleri">
+          <Key>
+            <PropertyRef Name="eylem_id" />
+          </Key>
+          <Property Name="eylem_id" Type="Int32" Nullable="false" />
+          <Property Name="kullanici_id" Type="Int32" />
+          <Property Name="eylem_aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="eylem_zamani" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="kullanicilar">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="Int32" Nullable="false" />
+          <Property Name="sifre_guvenlik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ad_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="tc" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="cinsiyet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="otobusler">
+          <Key>
+            <PropertyRef Name="otobus_id" />
+          </Key>
+          <Property Name="otobus_id" Type="Int32" Nullable="false" />
+          <Property Name="plaka" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="koltuk_sayisi" Type="Int32" />
+          <Property Name="firma_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="otobus_resim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="peron_no" Type="Int32" />
+        </EntityType>
+        <EntityType Name="seferler">
+          <Key>
+            <PropertyRef Name="seyahat_id" />
+          </Key>
+          <Property Name="seyahat_id" Type="Int32" Nullable="false" />
+          <Property Name="kalkis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="varis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kalkis_zamani" Type="DateTime" Precision="3" />
+          <Property Name="bilet_fiyat" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="otobus_id" Type="Int32" />
+          <Property Name="otobus_type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sifre_sifirlama">
+          <Key>
+            <PropertyRef Name="sifre_id" />
+          </Key>
+          <Property Name="sifre_id" Type="Int32" Nullable="false" />
+          <Property Name="kullanici_id" Type="Int32" />
+          <Property Name="sifirla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="son_kullanmaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="kullanilan" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="otobusbiletDBModelStoreContainer" CdmEntityContainer="otobusbiletDBEntities" >
+          <EntitySetMapping Name="biletler">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.biletler">
+              <MappingFragment StoreEntitySet="biletler">
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="satin_almaTarihi" ColumnName="satin_almaTarihi" />
+                <ScalarProperty Name="koltuk_id" ColumnName="koltuk_id" />
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="bilet_id" ColumnName="bilet_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="koltuklar">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.koltuklar">
+              <MappingFragment StoreEntitySet="koltuklar">
+                <ScalarProperty Name="isEmpty" ColumnName="isEmpty" />
+                <ScalarProperty Name="koltuk_numarasi" ColumnName="koltuk_numarasi" />
+                <ScalarProperty Name="seyahat_id" ColumnName="seyahat_id" />
+                <ScalarProperty Name="koltuk_id" ColumnName="koltuk_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kullanici_hareketleri">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.kullanici_hareketleri">
+              <MappingFragment StoreEntitySet="kullanici_hareketleri">
+                <ScalarProperty Name="eylem_zamani" ColumnName="eylem_zamani" />
+                <ScalarProperty Name="eylem_aciklama" ColumnName="eylem_aciklama" />
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="eylem_id" ColumnName="eylem_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kullanicilar">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.kullanicilar">
+              <MappingFragment StoreEntitySet="kullanicilar">
+                <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+                <ScalarProperty Name="tc" ColumnName="tc" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="ad_soyad" ColumnName="ad_soyad" />
+                <ScalarProperty Name="sifre_guvenlik" ColumnName="sifre_guvenlik" />
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="otobusler">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.otobusler">
+              <MappingFragment StoreEntitySet="otobusler">
+                <ScalarProperty Name="peron_no" ColumnName="peron_no" />
+                <ScalarProperty Name="otobus_resim" ColumnName="otobus_resim" />
+                <ScalarProperty Name="firma_adi" ColumnName="firma_adi" />
+                <ScalarProperty Name="koltuk_sayisi" ColumnName="koltuk_sayisi" />
+                <ScalarProperty Name="plaka" ColumnName="plaka" />
+                <ScalarProperty Name="otobus_id" ColumnName="otobus_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seferler">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.seferler">
+              <MappingFragment StoreEntitySet="seferler">
+                <ScalarProperty Name="otobus_type" ColumnName="otobus_type" />
+                <ScalarProperty Name="otobus_id" ColumnName="otobus_id" />
+                <ScalarProperty Name="bilet_fiyat" ColumnName="bilet_fiyat" />
+                <ScalarProperty Name="kalkis_zamani" ColumnName="kalkis_zamani" />
+                <ScalarProperty Name="varis" ColumnName="varis" />
+                <ScalarProperty Name="kalkis" ColumnName="kalkis" />
+                <ScalarProperty Name="seyahat_id" ColumnName="seyahat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sifre_sifirlama">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.sifre_sifirlama">
+              <MappingFragment StoreEntitySet="sifre_sifirlama">
+                <ScalarProperty Name="kullanilan" ColumnName="kullanilan" />
+                <ScalarProperty Name="son_kullanmaTarihi" ColumnName="son_kullanmaTarihi" />
+                <ScalarProperty Name="sifirla" ColumnName="sifirla" />
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="sifre_id" ColumnName="sifre_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="otobusbiletDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
